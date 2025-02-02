@@ -232,6 +232,7 @@ MonoBehaviour:
   jumpDust: {fileID: 3056306506631330835, guid: 8c0e813de855c9c4b9aecebeeea191c3, type: 3}
   fallDust: {fileID: 2131510362207389361, guid: cd4b56052d088954180883675808369a, type: 3}
   climbDust: {fileID: 1871352704916115831, guid: 7fed05cb07d955f4494c41167af991ef, type: 3}
+  blood: {fileID: 1995766711736715268, guid: 3703c7ea9b6c8f74b9d0197f5924680f, type: 3}
   body: {fileID: 6378134844483515781}
   backWall2: {fileID: 0}
   jumpGround:

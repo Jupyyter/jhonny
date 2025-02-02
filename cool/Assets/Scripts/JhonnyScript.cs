@@ -16,6 +16,7 @@ public class JhonnyScript : NetworkBehaviour
     [SerializeField] private GameObject jumpDust;
     [SerializeField] private GameObject fallDust;
     [SerializeField] private GameObject climbDust;
+    [SerializeField] private ParticleSystem blood;
     private bool canClimb = false;
     private bool onWalls = false;
     [SerializeField] private GameObject body;
@@ -34,6 +35,7 @@ public class JhonnyScript : NetworkBehaviour
     private bool facingright = true;
     private string currentState;
     private AnimationState anima;
+    private int hp=1;
     private const string MOVE_BODY_ANIMATION = "MoveBodyAnimation";
     private const string IDLE_BODY_ANIMATION = "IdleBodyAnimation";
     private const string NEW_JHONNY_JUMP_RUN_ANIMATION = "NewJhonnyJumpRun";
@@ -443,6 +445,25 @@ public class JhonnyScript : NetworkBehaviour
             }
             yield return new WaitForSeconds(0.07f);
             StartCoroutine(spwnClimbDust());
+        }
+    }
+    public void takeDMG()
+    {
+        hp--;
+        Instantiate(blood, transform.position, blood.transform.rotation);
+        if (hp == 0)
+        {
+            hp=1;
+
+            Instantiate(blood, transform.position, blood.transform.rotation);
+            Mirror.NetworkStartPosition[] startPositions = FindObjectsOfType<Mirror.NetworkStartPosition>();
+        Mirror.NetworkStartPosition startPosition = startPositions[0];
+        Vector3 resp = startPosition.transform.position;
+        this.transform.position = resp;
+        if(!facingright){
+            flip();
+        }
+        facingright=true;
         }
     }
     private void CmdClimbDust(Vector3 pos)

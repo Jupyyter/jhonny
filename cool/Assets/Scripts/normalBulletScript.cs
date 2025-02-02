@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 //(◣_◢)ノ-=≡≡卍
 public class normalBulletScript : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class normalBulletScript : MonoBehaviour
     [SerializeField] private GameObject normalEnd;
     [SerializeField] Transform d2;
     [SerializeField] Transform d3;
+    private JhonnyScript JH;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -48,6 +50,18 @@ public class normalBulletScript : MonoBehaviour
             Instantiate(normalEnd, trutransform.position, transform.rotation);
             Destroy(gameObject);
         }
+        else if (col.gameObject.GetComponent<Animator>() != null)//jhonny
+            {
+                JH = col.GetComponent<JhonnyScript>();
+                JH.takeDMG();
+                CmdendBullet();
+            }
+    }
+    private void CmdendBullet()
+    {
+        GameObject happyendPref = Instantiate(normalEnd, trutransform.position, transform.rotation);
+        NetworkServer.Spawn(happyendPref);
+        NetworkServer.Destroy(gameObject);
     }
 }
 /*

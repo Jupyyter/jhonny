@@ -1,23 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
 public class walkDustScript : NetworkBehaviour
 {
     private Animator anim;
+    private bool hasTriggeredDestroy = false;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
     }
+
     private void Update()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !anim.IsInTransition(0))//if animation over IT DIES 💀:)
+        if (!hasTriggeredDestroy && 
+            anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f && 
+            !anim.IsInTransition(0))
         {
-            CmddestroyThis();
-            Destroy(gameObject);
+            hasTriggeredDestroy = true;
+            // If we're on the server, destroy directly
+            if (isServer)
+            {
+                NetworkServer.Destroy(gameObject);
+            }
+            // If we're on the client, request destruction from server
+            else
+            {
+                CmddestroyThis();
+            }
         }
     }
+
     [Command(requiresAuthority = false)]
     private void CmddestroyThis()
     {

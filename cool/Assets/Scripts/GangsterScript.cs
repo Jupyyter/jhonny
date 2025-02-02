@@ -176,7 +176,6 @@ public class GangsterScript : NetworkBehaviour
     {
         if (speedNOW != 0 && canSpawnRunDust)
         {
-            Debug.Log("sadasad");
             canSpawnRunDust = false;
             Vector3 middleBottom = new Vector3(coll.bounds.center.x, coll.bounds.min.y, 0);
             CmdspwnRunDust(middleBottom);
