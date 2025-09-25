@@ -1,6 +1,5 @@
-a game in which you play as johnny and you shoot gangsters
+## Johnny game
 
+A game in which you play as Johnny Bravo and you fight gangsters.
 
-
-MY FAVORITE VIDEO:
-https://www.youtube.com/watch?v=Tq1Kl1luIjA&list=PLRqwkff4RU5oFjJjU2eZoyqcW3Ac0LhBh&index=5&pp=gAQBiAQB&ab_channel=Dr.Sponge
+Made in Unity.
